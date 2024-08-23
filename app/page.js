@@ -4,10 +4,15 @@ import Header from '@/Components/Header'
 import axios from 'axios'
 import RecipeCard from '@/Components/RecipeCard'
 import { MyContext } from '@/Helper/Context'
+import NotFound from '@/Components/NotFound'
+import Loading from '@/Components/Loading'
 
 const page = () => {
 
-  const { mountRandomMeal, setmountRandomMeal, showRandomMeal, srchMealList } = useContext(MyContext);
+  const { showRandomMeal, srchMealList, loadOrNotFound, setloadOrNotFound } = useContext(MyContext);
+
+
+  const [mountRandomMeal, setmountRandomMeal] = useState([]);
 
   //setting up the initial recipe cards 
   useEffect(() => {
@@ -54,10 +59,10 @@ const page = () => {
   return (
     <>
       <Header />
-      <main className='flex flex-wrap gap-3'>
-        {mealList.map((ele) => {
+      <main className='flex flex-col  gap-3 h-screen p-4'>
+        {(mealList.length > 0) ? mealList.map((ele) => {
           return <RecipeCard mealObj={ele} />
-        })}
+        }) : (loadOrNotFound) ? <Loading /> : <NotFound />}
       </main>
     </>
   )

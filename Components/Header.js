@@ -7,7 +7,7 @@ import React, { useContext, useEffect, useState } from 'react'
 const Header = () => {
 
     //accesiing data from context API
-    const { setmountRandomMeal, setsrchMealList, setshowRandomMeal } = useContext(MyContext);
+    const { setsrchMealList, setshowRandomMeal, loadOrNotFound, setloadOrNotFound } = useContext(MyContext);
     //accesing the router method from next
     const router = useRouter();
 
@@ -29,33 +29,8 @@ const Header = () => {
     }, [webTheme])
 
 
-    //             let res = await axios.get("https://www.themealdb.com/api/json/v1/1/random.
-    //             //to take out the ingredient and mesure from the meal object
-    //             let arr = [];
-    //             let ingredientArr = [];
-    //             for (let i in res.data.meals[0])
-    //                 arr.push(i)
 
-    //             for (let i = 9, j = 29; i <= 28, j <= 48; i++, j++) {
-    //                 if (data[arr[i]])
-    //                     ingredientArr.push({ name: data[arr[i]], quantity: data[arr[j]] })
-    //             }
 
-    //             let tempMealObj = {
-    //                 name: data.strMeal,
-    //                 category: data.strCategory,
-    //                 area: data.strArea,
-    //                 img: data.strMealThumb,
-    //                 watch: data.strYoutube,
-    //                 ingredient: ingredientArr
-    //             }
-    //             tempRandomMeal.push(tempMealObj);
-    //         } catch (err) {
-    //             console.log(err);
-    //         }
-    //     }
-    //     setmountRandomMeal([...tempRandomMeal])
-    // }
 
     const getSrchedMealList = async (len) => {
         let tempSrchedMeal = [];
@@ -64,28 +39,34 @@ const Header = () => {
             let data = res.data.meals;
             data.map((item) => {
                 if (item.strMeal.slice(0, len).toLowerCase() == srchInput) {
-                    console.log(true);
+
+                    //to separate the ingredients and quantity from the item obj
+                    let arr = [];
+                    let ingredientArr = [];
+                    for (let i in item)
+                        arr.push(i)
+                    for (let i = 9, j = 29; i <= 28, j <= 48; i++, j++) 
+                        if (item[arr[i]])
+                            ingredientArr.push({ name: item[arr[i]], quantity: item[arr[j]] })
+                    
+                    //making a object for recipe card
                     let tempMealObj = {
                         name: item.strMeal,
                         category: item.strCategory,
                         area: item.strArea,
                         img: item.strMealThumb,
                         watch: item.strYoutube,
-                        // ingredient: ingredientArr
+                        ingredient: ingredientArr
                     }
                     tempSrchedMeal.push(tempMealObj);
-
                 }
             })
         } catch (err) {
             console.log("not found");
 
         }
-        if (tempSrchedMeal.length > 0)
-            setsrchMealList([...tempSrchedMeal])
-        else
-        console.log("not found");
-        
+        setsrchMealList([...tempSrchedMeal])
+        if (tempSrchedMeal.length == 0) setloadOrNotFound(false)
     }
 
     //search food based on user input

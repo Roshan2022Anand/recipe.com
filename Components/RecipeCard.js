@@ -5,15 +5,20 @@ const RecipeCard = ({ mealObj }) => {
     return (
         <>
             <div className='recipe-card'>
-                <img src={mealObj.img} className='w-fit rounded-lg' />
-                <div>{mealObj.name}</div>
+                <div className='w-1/3 h-[20vw] '>
+                    <img src={mealObj.img} className='w-full h-full object-contain rounded-lg ' />
 
-                <details>
-                    <summary>Ingredients</summary>
-                    <p>
-                        { }
-                    </p>
-                </details>
+                </div>
+                <div className='grow border-[var(--border)] border-2'>
+                    <div>{mealObj.name}</div>
+
+                    <details>
+                        <summary>Ingredients</summary>
+                        <p>
+                            {JSON.stringify(mealObj.ingredient)}
+                        </p>
+                    </details>
+                </div>
             </div>
         </>
     )
