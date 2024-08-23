@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #A8D5BA;
+  /*nav*/
+  --secondary: #F7E7CE;
+  /*card*/
+  --accent: #FF6F61;
+  /*btn links*/
+  --text: #2F4F4F;
+  --background: #cbccc7;
+  --highlight: #FFC107;
+  --border: #c4d1c8;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+}
+
+button:hover {
+  scale: 1.2;
+  rotate: 30deg;
+  text-shadow: 5px 1px var(--background);
+}
+
+.recipe-card {
+  width: 100px;
+  background-color: var(--secondary);
+  border-radius: 10px;
+  padding: 3px;
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+  font-weight: bolder;
+  text-align: center;
+}
