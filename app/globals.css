@@ -26,7 +26,23 @@ body {
   color: var(--text);
 }
 
-button:hover {
+.logo{
+  border:2px solid white;
+  width: fit-content;
+  border-radius: 10px 0px 0px 10px;
+  padding: 2px;
+  border-right: none;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100vh;
+  padding: 1rem;
+}
+
+.shadow-hover:hover {
   scale: 1.2;
   rotate: 30deg;
   text-shadow: 5px 1px var(--background);
@@ -37,8 +53,17 @@ button:hover {
   width: 100%;
   background-color: var(--secondary);
   border-radius: 10px;
-  padding: 3px;
+  padding: 10px;
+  gap: 5px;
   font-size: 10px;
   font-weight: bolder;
   text-align: center;
+}
+
+.fav {
+  width: 10%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 3px;
 }

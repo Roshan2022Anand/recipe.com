@@ -8,9 +8,9 @@ import NotFound from '@/Components/NotFound'
 import Loading from '@/Components/Loading'
 
 const page = () => {
-
+  // localStorage.removeItem('favItemArr');
+  //context API
   const { showRandomMeal, srchMealList, loadOrNotFound, setloadOrNotFound } = useContext(MyContext);
-
 
   const [mountRandomMeal, setmountRandomMeal] = useState([]);
 
@@ -59,7 +59,7 @@ const page = () => {
   return (
     <>
       <Header />
-      <main className='flex flex-col  gap-3 h-screen p-4'>
+      <main>
         {(mealList.length > 0) ? mealList.map((ele) => {
           return <RecipeCard mealObj={ele} />
         }) : (loadOrNotFound) ? <Loading /> : <NotFound />}
